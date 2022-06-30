@@ -1,0 +1,17 @@
+#home{
+    background-image: url("../img/home1.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh !important;
+}
+#contenidoHome{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding-top: 30vh;
+   
+}
+#contenidoHome>div>h2{
+    color:#81A632;
+}
