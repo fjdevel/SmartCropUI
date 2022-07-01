@@ -2,7 +2,6 @@ import React from "react";
 import loginImg from "../smartCropLogo.png";
 import axios from 'axios';
 import config from '../../../config.json';
-import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
 
@@ -30,7 +29,7 @@ export class Login extends React.Component {
           let jwt = jwt_decode(localStorage.getItem("access_token"));
           
           if(jwt.roles[0]==="ROLE_SUPER_ADMIN"){
-            ///
+            window.location.href = "/dashboardAdmin";
           }
         }
       }

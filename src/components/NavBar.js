@@ -2,6 +2,8 @@ import React from "react";
 import {Nav,NavLink,NavMenu} from "./NavbarElements";
 import logo from './logo.png';
 import styled from "styled-components";
+import {validarToken} from '../helpers/helper';
+import jwt_decode from "jwt-decode";
 
 const LogoInicial =  styled.div`
     margin-left:50px;
@@ -16,30 +18,62 @@ const LogoInicial =  styled.div`
 `;
 
 const NavBar = ()=>{
-return(
-    <>
-        <Nav>
-            <div>
-            <LogoInicial>
-                <img src={logo} alt="logo"/>
-                <h3>Smart Crop</h3>
-            </LogoInicial>
-            </div>
-            <NavMenu>
-                
-                <NavLink to="/" >
-                    Inicio
-                </NavLink>
-                <NavLink to="#caracteristicas" >
-                    Caracteristicas
-                </NavLink>
-                <NavLink to="/login" >
-                    Login
-                </NavLink>
-            </NavMenu>
-        </Nav>
-    </>
-)
+    if(validarToken()){
+        return(
+            <>
+                <Nav>
+                    <div>
+                    <LogoInicial>
+                        <img src={logo} alt="logo"/>
+                        <h3>Smart Crop</h3>
+                    </LogoInicial>
+                    </div>
+                    <NavMenu>
+                        
+                        <NavLink to="/" >
+                            Inicio
+                        </NavLink>
+                        <NavLink to="#caracteristicas" >
+                            Caracteristicas
+                        </NavLink>
+                        <NavLink to="/login" >
+                            Login
+                        </NavLink>
+                    </NavMenu>
+                </Nav>
+            </>
+        );
+    }else{
+        let jwt = jwt_decode(localStorage.getItem("access_token"));
+        if(jwt.roles[0]==="ROLE_SUPER_ADMIN"){
+          return(  <>
+                <Nav>
+                    <div>
+                    <LogoInicial>
+                        <img src={logo} alt="logo"/>
+                        <h3>Smart Crop</h3>
+                    </LogoInicial>
+                    </div>
+                    <NavMenu>
+                        
+                        <NavLink to="/" >
+                            Inicio
+                        </NavLink>
+                        <NavLink to="/dashboardAdmin" >
+                            Dashboard
+                        </NavLink>
+                        <NavLink to="/users" >
+                            Usuarios
+                        </NavLink>
+                        <NavLink to="#" >
+                            salir
+                        </NavLink>
+                    </NavMenu>
+                </Nav>
+            </>);
+          }
+    }
+
 };
 
 export default NavBar;
