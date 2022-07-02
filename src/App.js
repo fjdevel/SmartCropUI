@@ -6,6 +6,7 @@ import UserList  from './pages/user-list';
 import InicioPage  from './pages/inicio';
 import LoginPage  from './pages/Login/LoginPage';
 import AdminPage  from './pages/AdminPage/AdminPage';
+import CalendarPage  from './pages/Calendar/Calendar';
 import { Register } from './pages/Login/components';
 
 import Navbar from './components/NavBar';
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<InicioPage/>}/>
         <Route path="/users" element={<UserList/>}/>
         <Route path="/dashboardAdmin" element={<AdminPage/>}/>
+        <Route path="/calendar" element={<CalendarPage/>}/>
       </Routes>
     </Router>
   );
