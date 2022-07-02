@@ -49,8 +49,8 @@ export class Login extends React.Component {
           </div>
           <div className="form">
             <div className="form-group">
-              <label htmlFor="username" className="mb-1 color-text">Digite su correo electronico</label>
-              <input type="text" name="username" placeholder="Digite su correo electronico" />
+              <label htmlFor="username" className="mb-1 color-text">Digite su usuario</label>
+              <input type="text" name="username" placeholder="Digite su usuario" />
             </div>
             <div className="form-group">
               <label htmlFor="password" className="mb-1 color-text">Digite su contraseña</label>
@@ -60,7 +60,7 @@ export class Login extends React.Component {
         </div>
         <div className="footer d-flex justify-content-center w-100">
           <button type="submit" className="color-container  mx-2 fw-bold p-2 w-50">
-            Login
+            Iniciar sesión
           </button>
           {/* <button type="button" className="color-container mx-2 fw-bold p-2 w-50">
             Registrarse

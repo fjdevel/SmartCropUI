@@ -2,7 +2,6 @@ import React from "react";
 import {Nav,NavLink,NavMenu} from "./NavbarElements";
 import logo from './logo.png';
 import styled from "styled-components";
-import {validarToken} from '../helpers/helper';
 import jwt_decode from "jwt-decode";
 
 const LogoInicial =  styled.div`
@@ -17,8 +16,17 @@ const LogoInicial =  styled.div`
     }
 `;
 
+const clean = function(){
+    localStorage.clear();
+    window.location.href = "/";
+}
+
 const NavBar = ()=>{
-    if(validarToken()){
+    let store = localStorage.getItem("access_token");
+    let jwt=null;
+    if(store!=null)
+        jwt = jwt_decode(store);
+    if(jwt==null){
         return(
             <>
                 <Nav>
@@ -65,7 +73,7 @@ const NavBar = ()=>{
                         <NavLink to="/users" >
                             Usuarios
                         </NavLink>
-                        <NavLink to="#" >
+                        <NavLink to="/" onClick={clean}>
                             salir
                         </NavLink>
                     </NavMenu>
