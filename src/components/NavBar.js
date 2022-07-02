@@ -1,87 +1,42 @@
-import React from "react";
-import {Nav,NavLink,NavMenu} from "./NavbarElements";
-import logo from './logo.png';
-import styled from "styled-components";
-import jwt_decode from "jwt-decode";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import {AppBar, Toolbar, IconButton, Typography} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const LogoInicial =  styled.div`
-    margin-left:50px;
-    text-align:center;
-    img{
-        max-width:50px;
-        margin:auto;
-    }
-    h3{
-        color:#81A632;
-    }
-`;
+const useStyles = makeStyles(()=>({
+    root:{
+        flexGrow: 1
+    },
+    menuButton:{
+        marginRight: '16px'
+    },
+    title:{
+        flexGrow: 1
+    },
+    imagen:{
+        borderRadius: '50%'
+    },
+}));
 
-const clean = function(){
-    localStorage.clear();
-    window.location.href = "/";
+function Navbar(props){
+    const classes = useStyles();
+    return(
+        <div className={classes.root}>
+            <AppBar position = "static">
+                <Toolbar>
+                    <IconButton edge = "start" className={classes.menuButton} color= "inherit">
+                        <MenuIcon/>
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        Smart Crop
+                    </Typography>
+                    <IconButton color = "inherit">
+                        <img src ={require('../assets/img/smartCropLogo.png')} width="40px" height="40px" className={classes.imagen}/>
+                    </IconButton>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
-const NavBar = ()=>{
-    let store = localStorage.getItem("access_token");
-    let jwt=null;
-    if(store!=null)
-        jwt = jwt_decode(store);
-    if(jwt==null){
-        return(
-            <>
-                <Nav>
-                    <div>
-                    <LogoInicial>
-                        <img src={logo} alt="logo"/>
-                        <h3>Smart Crop</h3>
-                    </LogoInicial>
-                    </div>
-                    <NavMenu>
-                        
-                        <NavLink to="/" >
-                            Inicio
-                        </NavLink>
-                        <NavLink to="#caracteristicas" >
-                            Caracteristicas
-                        </NavLink>
-                        <NavLink to="/login" >
-                            Login
-                        </NavLink>
-                    </NavMenu>
-                </Nav>
-            </>
-        );
-    }else{
-        let jwt = jwt_decode(localStorage.getItem("access_token"));
-        if(jwt.roles[0]==="ROLE_SUPER_ADMIN"){
-          return(  <>
-                <Nav>
-                    <div>
-                    <LogoInicial>
-                        <img src={logo} alt="logo"/>
-                        <h3>Smart Crop</h3>
-                    </LogoInicial>
-                    </div>
-                    <NavMenu>
-                        
-                        <NavLink to="/" >
-                            Inicio
-                        </NavLink>
-                        <NavLink to="/dashboardAdmin" >
-                            Dashboard
-                        </NavLink>
-                        <NavLink to="/users" >
-                            Usuarios
-                        </NavLink>
-                        <NavLink to="/" onClick={clean}>
-                            salir
-                        </NavLink>
-                    </NavMenu>
-                </Nav>
-            </>);
-          }
-    }
-
-};
-
-export default NavBar;
+export default Navbar;

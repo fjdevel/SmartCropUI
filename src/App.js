@@ -7,6 +7,7 @@ import InicioPage  from './pages/inicio';
 import LoginPage  from './pages/Login/LoginPage';
 import AdminPage  from './pages/AdminPage/AdminPage';
 import { Register } from './pages/Login/components';
+
 import Navbar from './components/NavBar';
 import 'bootstrap/dist/css/bootstrap.css';
 
